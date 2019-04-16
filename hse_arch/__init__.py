@@ -13,7 +13,7 @@ admin = Admin()  # Создаем обертку над админкой
 # peewee_api = RestAPI()  # не уверен, что это делается здесь
 
 
-def create_app(config_class=DevelopmentConfig):
+def create_app(config_class):
     from hse_arch.models.category import Category
     from hse_arch.models.customer import Customer
     from hse_arch.models.order import Order, OrderItem
@@ -27,7 +27,7 @@ def create_app(config_class=DevelopmentConfig):
     db.init_app(app)  # Инициируем БД
     db.database.create_tables(ms)  # Создаем таблицы в БД, но это не точно
     init_admin(app, db)
-
     return app
 
 # TODO: определиться, куда в подобном конфиге совать api.add_resource в create_app или в другое место
+# TODO: разобраться с тем, как передавать в Application Factory объект конфига, если запускать через flask run
