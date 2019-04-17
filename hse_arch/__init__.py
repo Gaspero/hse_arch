@@ -12,6 +12,14 @@ admin = Admin()  # Создаем обертку над админкой
 # auth = Auth()  # не уверен, что это делается здесь
 # peewee_api = RestAPI()  # не уверен, что это делается здесь
 
+# config = {
+#     "production": "config.ProductionConfig",
+#     "development": "config.DevelopmentConfig",
+#     "testing": "config.TestingConfig",
+#     "default": "config.Config"
+# }
+# TODO: https://damyanon.net/post/flask-series-configuration/ - решение проблемы с парсингом аргументов
+
 
 def create_app(config_class):
     from hse_arch.models.category import Category
