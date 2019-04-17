@@ -41,5 +41,11 @@ class OrderItem(db.Model):
     # list_price = FloatField(default=0, null=False) ???
     quantity = IntegerField(default=0, null=False)
 
+    # метод для получения количества айтемов в заказе
+    @classmethod
+    def get_order_item_number(cls, order_id):
+        query = cls.select().where(cls.order_id == order_id)  # делаем запрос к БД, чтобы получить Order по id
+        return len(query)  # возращаем количество аттрибутов OrderItem у данного Order
+
     class Meta:
         table_name = 'order_items'
