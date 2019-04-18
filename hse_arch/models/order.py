@@ -49,3 +49,12 @@ class OrderItem(db.Model):
 
     class Meta:
         table_name = 'order_items'
+
+    # метод для получения стоимости заказов в корзине
+    @classmethod
+    def get_order_amount(cls, order_id):
+        subquery = (cls
+                    .select(fn.SUM(Product.price * cls.quantity).alias('sum'))  # получаем сумму цена*количество
+                    .join(Product, on=(cls.product_id == Product.product_id))  # добавляем продукт чтобы получить цену
+                    .where(cls.order_id == order_id))  # результат только для items в указанном ордере
+        return subquery[0].sum
