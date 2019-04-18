@@ -19,6 +19,8 @@ class Product(db.Model):
     fat = FloatField(null=True)
     carbons = FloatField(null=True)
     category_id = ForeignKeyField(Category, to_field='category_id', null=True)
+#    ingredient_id = ManyToManyField(ProductIngredient, to_field='ingredient_id', null=True, backref="product")
+
 
     class Meta:
         table_name = 'products'
@@ -35,20 +37,32 @@ class Product(db.Model):
         return result
 
 
-class ProductIngredient(db.Model):
+
+class Ingredient(db.Model):
     ingredient_id = PrimaryKeyField()
-    product_id = ForeignKeyField(Product, backref='ingredients')
     name = CharField(null=False)
+
+
+    class Meta:
+        table_name = 'ingredients'
+
+    def __str__(self):
+        return self.name
+
+
+class ProductIngredient(db.Model):
+    ingredient_id = ForeignKeyField(Ingredient, backref='product_ingredients')
+    product_id = ForeignKeyField(Product, backref='product_ingredients')
+
+    class Meta:
+        table_name = 'product ingredients'
 
     def __str__(self):
         return self.name
 
     # метод для фильтрации продуктов по ингредиентам, принимает список или список из одного элемента
     # TODO: добавить игредиенты как ForeignKeyField в Product, перенести filter_products туда
-    @classmethod
-    def filter_products(cls, product_list):
-        result = ProductIngredient.select().where(cls.name.in_(product_list))
-        return result
-
-    class Meta:
-        table_name = 'product ingredients'
+    #@classmethod
+    #def filter_products(cls, product_list):
+    #    result = ProductIngredient.select().where(cls.name.in_(product_list))
+    #    return result
