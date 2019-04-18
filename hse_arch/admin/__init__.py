@@ -24,7 +24,7 @@ def init_admin(app, db):
 
     from hse_arch.models.customer import Customer
     from hse_arch.models.order import Order, OrderItem
-    from hse_arch.models.product import Product, ProductIngredient
+    from hse_arch.models.product import Product, ProductIngredient, Ingredient
     from hse_arch.models.producers import Producer
     from hse_arch.models.category import Category
     from hse_arch.models.user import User
@@ -33,6 +33,7 @@ def init_admin(app, db):
     admin.register(Order)
     admin.register(OrderItem)
     admin.register(Product)
+    admin.register(Ingredient)
     admin.register(Producer)
     admin.register(Category)
     admin.register(ProductIngredient)
