@@ -17,7 +17,7 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
     DATABASE = {'engine': 'peewee.SqliteDatabase', 'name': 'testing.db'}
-    DEBUG = False
+    DEBUG = True
     FLASK_DEBUG = 1
     TRAILING_SLASH = False
     SECRET_KEY = 'Secret'
