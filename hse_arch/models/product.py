@@ -5,7 +5,6 @@ from peewee import *
 from hse_arch import db
 from hse_arch.models.category import Category
 
-
 class Product(db.Model):
     product_id = PrimaryKeyField()
     name = CharField(unique=True, null=False)
@@ -21,13 +20,6 @@ class Product(db.Model):
     category_id = ForeignKeyField(Category, to_field='category_id', null=True)
 #    ingredient_id = ManyToManyField(ProductIngredient, to_field='ingredient_id', null=True, backref="product")
 
-
-    class Meta:
-        table_name = 'products'
-
-    def __str__(self):
-        return self.name
-
     @classmethod
     def sort_by_price(cls, direction):
         if direction == 'asc' or direction is None:
@@ -36,19 +28,30 @@ class Product(db.Model):
             result = cls.select().order_by(cls.price.desc())
         return result
 
+    @classmethod
+    def filter_ingredient(cls, ingr):
+        result = cls\
+            .select()\
+            .join(ProductIngredient, on=(cls.product_id == ProductIngredient.product_id))\
+            .join(Ingredient, on=(ProductIngredient.ingredient_id == Ingredient.ingredient_id))\
+            .where(Ingredient.name.in_(ingr))
+        return result
 
+    class Meta:
+        table_name = 'products'
+
+    def __str__(self):
+        return self.name
 
 class Ingredient(db.Model):
     ingredient_id = PrimaryKeyField()
     name = CharField(null=False)
-
 
     class Meta:
         table_name = 'ingredients'
 
     def __str__(self):
         return self.name
-
 
 class ProductIngredient(db.Model):
     ingredient_id = ForeignKeyField(Ingredient, backref='product_ingredients')
@@ -59,10 +62,3 @@ class ProductIngredient(db.Model):
 
     def __str__(self):
         return self.name
-
-    # метод для фильтрации продуктов по ингредиентам, принимает список или список из одного элемента
-    # TODO: добавить игредиенты как ForeignKeyField в Product, перенести filter_products туда
-    #@classmethod
-    #def filter_products(cls, product_list):
-    #    result = ProductIngredient.select().where(cls.name.in_(product_list))
-    #    return result

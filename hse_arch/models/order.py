@@ -41,5 +41,20 @@ class OrderItem(db.Model):
     # list_price = FloatField(default=0, null=False) ???
     quantity = IntegerField(default=0, null=False)
 
+    # метод для получения количества айтемов в заказе
+    @classmethod
+    def get_order_item_number(cls, order_id):
+        query = cls.select().where(cls.order_id == order_id)  # делаем запрос к БД, чтобы получить Order по id
+        return len(query)  # возращаем количество аттрибутов OrderItem у данного Order
+
     class Meta:
         table_name = 'order_items'
+
+    # метод для получения стоимости заказов в корзине
+    @classmethod
+    def get_order_amount(cls, order_id):
+        subquery = (cls
+                    .select(fn.SUM(Product.price * cls.quantity).alias('sum'))  # получаем сумму цена*количество
+                    .join(Product, on=(cls.product_id == Product.product_id))  # добавляем продукт чтобы получить цену
+                    .where(cls.order_id == order_id))  # результат только для items в указанном ордере
+        return subquery[0].sum
