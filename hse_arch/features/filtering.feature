@@ -1,7 +1,7 @@
 # Created by alina at 17.04.2019
-Feature: filtering
+Feature: Product filtering
 
-  Scenario: Sort products by ProductIngredients
+  Scenario: Filter products by ProductIngredients
     Given a set of products in the menu
       | product_id | name      | price | description         |
       | 1          | Pen       | 30    | nice pen            |
@@ -25,5 +25,5 @@ Feature: filtering
       | 1          | Pen       | 30    | nice pen            |
       | 3          | Apple     | 10    | also nice pineapple |
 
-#  Scenario: # Enter scenario name here
+#  TODO Scenario: Filter by category 
     # Enter steps here

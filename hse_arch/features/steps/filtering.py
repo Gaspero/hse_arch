@@ -36,7 +36,7 @@ def also_step_12(context):
 
 @when('I select mushrooms in the ingredients')
 def step_2(context):
-    context.result = Product.filter_ingredient(["mushrooms"])
+    context.result = Product.filter_by_ingredient(["mushrooms"])
     assert context.result
 
 @then('System returns the following set of products')
