@@ -27,6 +27,7 @@ def init_admin(app, db):
     from hse_arch.models.product import Product, ProductIngredient, Ingredient
     from hse_arch.models.producers import Producer
     from hse_arch.models.category import Category
+    from hse_arch.models.sets import Set, SetProduct
     from hse_arch.models.user import User
 
     admin.register(Customer, CustomerAdmin)
@@ -34,9 +35,11 @@ def init_admin(app, db):
     admin.register(OrderItem)
     admin.register(Product)
     admin.register(Ingredient)
+    admin.register(ProductIngredient)
     admin.register(Producer)
     admin.register(Category)
-    admin.register(ProductIngredient)
+    admin.register(Set)
+    admin.register(SetProduct)
     admin.register(User)
     admin.setup()
 

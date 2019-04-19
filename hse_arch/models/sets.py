@@ -13,6 +13,14 @@ class Set(db.Model):
     create_time = DateTimeField(default=datetime.now, null=False)
     description = CharField(null=False)
 
+    @classmethod
+    def sort_by_price(cls, direction):
+        if direction == 'asc' or direction is None:
+            result = cls.select().order_by(cls.price.asc())
+        if direction == 'desc':
+            result = cls.select().order_by(cls.price.desc())
+        return result
+
     class Meta:
         table_name = 'sets'
 

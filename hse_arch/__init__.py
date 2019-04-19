@@ -27,9 +27,10 @@ def create_app(config_class):
     from hse_arch.models.order import Order, OrderItem
     from hse_arch.models.product import Product, ProductIngredient, Ingredient
     from hse_arch.models.producers import Producer
+    from hse_arch.models.sets import Set, SetProduct
     from hse_arch.models.user import User
     app = Flask(__name__)  # Создаем экземпляр класса Flask-приложения
-    ms = [Product, Customer, Order, OrderItem, Producer, ProductIngredient, Ingredient, Category, User]
+    ms = [Product, Customer, Order, OrderItem, Producer, ProductIngredient, Ingredient, Set, SetProduct, Category, User]
     app.config.from_object(config[config_class])  # Настраиваем приложение из конфиг-файла
     app.url_map.strict_slashes = False  # Указываем игнорирововать слеша в конце url
     db.init_app(app)  # Инициируем БД
