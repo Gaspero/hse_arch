@@ -36,14 +36,19 @@ def also_step_12(context):
 
 @when('I select mushrooms in the ingredients')
 def step_2(context):
-    pass
-    #context.result = Product.filter_products(["mushrooms"])
-   #assert context.result
+    context.result = Product.filter_ingredient(["mushrooms"])
+    assert context.result
 
 @then('System returns the following set of products')
 def step3(context):
     pass
+#    for index, row in enumerate(context.my_table1):
+#        print("original", index, row['name'])
 
 #    for index, row in enumerate(context.result):
-#        print("---", index, row)
+#        print("filtered", index, row.name, row.product_id)
+
+#        for attr, value in row.__dict__.items():
+#            print(attr, value)
+
         #assert row['name'] == context.my_table1[index].name

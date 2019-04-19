@@ -30,7 +30,11 @@ class Product(db.Model):
 
     @classmethod
     def filter_ingredient(cls, ingr):
-        result = cls.select().join(ProductIngredient).join(Ingredient).where(Ingredient.name.in_(ingr))
+        result = cls\
+            .select()\
+            .join(ProductIngredient, on=(cls.product_id == ProductIngredient.product_id))\
+            .join(Ingredient, on=(ProductIngredient.ingredient_id == Ingredient.ingredient_id))\
+            .where(Ingredient.name.in_(ingr))
         return result
 
     class Meta:
