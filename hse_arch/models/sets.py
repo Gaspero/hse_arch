@@ -9,7 +9,7 @@ class Set(db.Model):
     set_id = PrimaryKeyField()
     name = CharField(unique=True, null=False)
     price = FloatField(default=0, null=False)
-    person = IntegerField(default=1, null=False)
+    people = IntegerField(default=1, null=False)
     create_time = DateTimeField(default=datetime.now, null=False)
     description = CharField(null=False)
 
@@ -19,6 +19,14 @@ class Set(db.Model):
             result = cls.select().order_by(cls.price.asc())
         if direction == 'desc':
             result = cls.select().order_by(cls.price.desc())
+        return result
+
+    @classmethod
+    def sort_by_people(cls, direction):
+        if direction == 'asc' or direction is None:
+            result = cls.select().order_by(cls.people.asc())
+        if direction == 'desc':
+            result = cls.select().order_by(cls.people.desc())
         return result
 
     class Meta:
