@@ -1,5 +1,5 @@
 # Created by ivanshadrin at 2019-04-14
-Feature: Product sorting and filtering
+Feature: Product sorting
 
   Scenario: Sort products by price
     Given a set of products
