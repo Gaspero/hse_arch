@@ -1,7 +1,7 @@
 # Created by alina at 17.04.2019
-Feature: Product filtering
+Feature: filtering
 
-  Scenario: Filter products by ProductIngredients
+  Scenario: Sort products by ProductIngredients
     Given a set of products in the menu
       | product_id | name      | price | description         |
       | 1          | Pen       | 30    | nice pen            |
@@ -20,10 +20,10 @@ Feature: Product filtering
       | 3             | 2          |
       | 1             | 3          |
    When I select mushrooms in the ingredients
-    Then System returns the following set of products
+   Then System returns the following set of products
       | product_id | name      | price | description         |
       | 1          | Pen       | 30    | nice pen            |
       | 3          | Apple     | 10    | also nice pineapple |
 
-#  TODO Scenario: Filter by category 
+#  Scenario: # Enter scenario name here
     # Enter steps here
