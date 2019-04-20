@@ -61,4 +61,4 @@ class ProductIngredient(db.Model):
         table_name = 'product ingredients'
 
     def __str__(self):
-        return self.name
+        return f'{self.ingredient_id} : {self.product_id}'
