@@ -16,3 +16,13 @@ class Producer(db.Model):
         table_name = 'producers'
 
 # TODO: добавить время работы
+
+class Courier(db.Model):
+    courier_id = PrimaryKeyField()
+    producer_id = ForeignKeyField(Producer, backref='courier')
+
+    class Meta:
+        table_name = 'couriers'
+
+    def __str__(self):
+        return self.courier_id
